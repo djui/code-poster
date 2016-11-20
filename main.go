@@ -27,6 +27,7 @@ const (
 func main() {
 	var (
 		srcPathFlag            = flag.String("src", "", "path to source code")
+		srcPatternFlag         = flag.String("srcpattern", "*.go", "pattner of source code filename")
 		outPathFlag            = flag.String("out", "", "path to image output [svg]")
 		outWidthFlag           = flag.Float64("width", 10, "width [cm]")
 		outHeightFlag          = flag.Float64("height", 12, "height [cm]")
@@ -44,7 +45,7 @@ func main() {
 	)
 	flag.Parse()
 
-	files, err := findFiles(*srcPathFlag, "*.go")
+	files, err := findFiles(*srcPathFlag, *srcPatternFlag)
 	if err != nil {
 		log.Printf("Warn: problems searching files: %v", err)
 	}
